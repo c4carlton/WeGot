@@ -1,9 +1,10 @@
 const data = require('./allData.js');
 const mongoose = require('mongoose');
 const Photos = require('../database/index.js');
+
 const API_KEY = 'AIzaSyCjAQ33tNqsfUoF1CV0TDw8GcoHqSf3dgo';
 
-mongoose.connect('mongodb://database/photos', (err) => {
+mongoose.connect('mongodb://localhost/photos', (err) => {
   if (err) {
     throw err;
   } else {
@@ -11,11 +12,20 @@ mongoose.connect('mongodb://database/photos', (err) => {
   }
 });
 
+// mongoose.connect('mongodb://database/photos', (err) => {
+//   if (err) {
+//     throw err;
+//   } else {
+//     console.log('mongoose connected');
+//   }
+// });
+
 function seedDb() {
   let count = 0;
   Photos.isSeeded().then((result) => {
     if (result === 0) {
-      data.forEach((place) => { // for each ID
+      data.forEach((place) => {
+        // for each ID
         const entry = {
           place_id: place.result.place_id,
           place_name: place.result.name,
@@ -24,7 +34,8 @@ function seedDb() {
         };
         // push photo details to entry
         const photos = place.result.photos;
-        const PHOTOS_URL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference=';
+        const PHOTOS_URL =
+          'https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference=';
 
         for (let i = 0; i < photos.length; i += 1) {
           const photoRef = photos[i].photo_reference;
@@ -69,6 +80,5 @@ function seedDb() {
 }
 
 seedDb(data);
-
 
 module.exports = seedDb;
