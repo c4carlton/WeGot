@@ -1,10 +1,11 @@
-const data = require('./allData.js');
+// const data = require('./allData.js');
+const data = require('../fakerDataTest.json')
 const mongoose = require('mongoose');
 const Photos = require('../database/index.js');
 
-const API_KEY = 'AIzaSyCjAQ33tNqsfUoF1CV0TDw8GcoHqSf3dgo';
+// const API_KEY = 'AIzaSyCjAQ33tNqsfUoF1CV0TDw8GcoHqSf3dgo';
 
-mongoose.connect('mongodb://localhost/photos', (err) => {
+mongoose.connect('mongodb://localhost/carlton', (err) => {
   if (err) {
     throw err;
   } else {
@@ -23,23 +24,24 @@ mongoose.connect('mongodb://localhost/photos', (err) => {
 function seedDb() {
   let count = 0;
   Photos.isSeeded().then((result) => {
+    console.log(result, 'this is result')
     if (result === 0) {
       data.forEach((place) => {
         // for each ID
         const entry = {
-          place_id: place.result.place_id,
-          place_name: place.result.name,
+          place_id: place.place_id,
+          place_name: place.place_name,
           photos: [],
           reviews: [],
         };
         // push photo details to entry
-        const photos = place.result.photos;
+        const photos = place.photos;
         const PHOTOS_URL =
-          'https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference=';
+          'http://lorempixel.com/640/480/food';
 
         for (let i = 0; i < photos.length; i += 1) {
           const photoRef = photos[i].photo_reference;
-          const photoUrl = `${PHOTOS_URL}${photoRef}&key=${API_KEY}`;
+          const photoUrl = "http://lorempixel.com/640/480/food";
           const details = {
             ref: photoRef,
             url: photoUrl,
@@ -50,12 +52,12 @@ function seedDb() {
         }
 
         // push each review to entry
-        const reviews = place.result.reviews;
+        const reviews = place.reviews;
 
         for (let j = 0; j < reviews.length; j += 1) {
           const review = {
-            name: reviews[j].author_name,
-            avatar: reviews[j].profile_photo_url,
+            name: reviews[j].name,
+            avatar: reviews[j].avatar,
           };
           entry.reviews.push(review);
         }

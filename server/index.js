@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 
-mongoose.connect("mongodb://localhost/photos");
+mongoose.connect("mongodb://localhost/carlton");
 // mongoose.connect('mongodb://database/photos');
 
 const Photos = require("../database/index.js");
@@ -33,8 +33,10 @@ app.get("/api/restaurants/:id/gallery", (req, res) => {
   console.log("server querying for id: ", id);
   Photos.findOne(id, (err, data) => {
     if (err) {
+      console.log(err, ' this is error in expresss')
       res.sendStatus(500);
     } else {
+      console.log(data, 'this is data in express')
       res.json(data);
     }
   });

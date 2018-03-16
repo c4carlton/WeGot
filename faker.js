@@ -1,12 +1,12 @@
-const faker = require('faker');
+ const faker = require('faker');
 const fs = require('fs');
 
-const write = fs.createWriteStream('fakerData0.json');
+const write = fs.createWriteStream('fakerDataTest.json');
 
 // let regex = /\,(?!\s*?[\{\[\"\'\w])/g;
 // let correct = input.replace(regex, '');
 
-//write.write('[');
+write.write('[');
 // 0 - 0 < 1000000
 // 1 - let i = 1000000; i < 2000000; i++
 // 2 - let i = 2000000; i < 3000000; i++
@@ -18,28 +18,28 @@ const write = fs.createWriteStream('fakerData0.json');
 // 8 - let i = 8000000; i < 9000000; i++
 // 9 - let i = 9000000; i < 10000000; i++
 
-for (let i = 0; i < 1000000; i++) {
+for (let i = 1; i < 2; i++) {
   const input = {
-    key_id: i,
+    place_id: i.toString(),
     place_name: faker.company.companyName(),
     photos: [
       {
-        ref: faker.lorem.sentence(),
-        url: faker.internet.url(),
+        ref: faker.lorem.word(),
+        url: faker.image.food(),
         width: Math.floor(Math.random() * 1000),
-        height: Math.floor(Math.random() * 1000),
+        height: Math.floor(Math.random() * 1000)
       },
     ],
     reviews: [
       {
         name: faker.name.firstName(),
-        avatar: faker.image.image(),
+        avatar: faker.image.avatar(),
       },
     ],
   };
-  write.write(`${JSON.stringify(input)} \n`);
+  write.write(`${JSON.stringify(input)},`);
 }
-//write.write(']')
+write.write(']')
 write.end();
 
 // const fakerPhotos = {

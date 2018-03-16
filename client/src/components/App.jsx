@@ -31,6 +31,7 @@ export default class App extends React.Component {
 
     axios.get(`/api/restaurants/${id}/gallery`)
       .then((response) => {
+        console.log(response)
         context.setState({
           data: response.data[0],
           siteName: response.data[0].place_name,
@@ -88,7 +89,7 @@ export default class App extends React.Component {
 
   populateMainGrid() {
     const display = [];
-    for (let i = 0; i < 8; i += 1) {
+    for (let i = 0; i < 1; i += 1) {
       display.push(this.state.photos[i]);
     }
     this.setState({ mainGridImages: display });
