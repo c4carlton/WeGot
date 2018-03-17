@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 
-mongoose.connect("mongodb://localhost/carlton");
+mongoose.connect("mongodb://localhost/photos");
 // mongoose.connect('mongodb://database/photos');
 
 const Photos = require("../database/index.js");

@@ -5,7 +5,7 @@ const Photos = require('../database/index.js');
 
 // const API_KEY = 'AIzaSyCjAQ33tNqsfUoF1CV0TDw8GcoHqSf3dgo';
 
-mongoose.connect('mongodb://localhost/carlton', (err) => {
+mongoose.connect('mongodb://localhost/photos', (err) => {
   if (err) {
     throw err;
   } else {
