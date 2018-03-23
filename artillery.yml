@@ -1,0 +1,20 @@
+config:
+  http:
+    pool:10
+  environments:
+    local:
+  target: 'http://localhost:3001'
+  phases:
+    - duration: 20
+      arrivalRate: 15
+    - duration: 40
+      arrivalRate: 5
+    - duration: 60
+      arrivalRate: 25
+scenarios:
+  - name: "pageload"
+    flow:
+      - loop:
+        - get:
+            url: "/restaurants/{{$randomNumber(1,10000000)}"
+        count: 4
