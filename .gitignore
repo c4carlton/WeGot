@@ -25,5 +25,5 @@ coverage
 build/
 dist/bundle.js
 
-
+#
 newrelic.js
