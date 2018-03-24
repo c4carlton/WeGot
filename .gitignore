@@ -26,4 +26,7 @@ build/
 dist/bundle.js
 
 #
-./newrelic.js
+newrelic.js
+
+#
+config.js

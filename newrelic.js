@@ -13,8 +13,8 @@ exports.config = {
   /**
    * Your New Relic license key.
    */
-  license_key: '1',
-  // why is this still pushing if in gitignore?
+  license_key: '',
+  //whys
   logging: {
     /**
      * Level at which to log. 'trace' is most useful to New Relic when diagnosing
