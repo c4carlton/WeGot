@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon server/index.js",
+    "server": " DATABASE=‘mongodb://172.31.18.39:27017/photos’ nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "seed": "node data/seed.js",
     "test": "jest",
@@ -26,6 +26,7 @@
     "jquery": "^3.3.1",
     "mongoose": "^5.0.6",
     "mysql": "^2.15.0",
+    "new": "^0.1.1",
     "newrelic": "^3.2.0",
     "npm": "^5.7.1",
     "pm2": "^2.10.1",
@@ -41,6 +42,7 @@
     "react-photo-gallery": "^6.0.22",
     "react-responsive-modal": "^2.0.1",
     "redis": "^2.8.0",
+    "relic": "^0.2.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
   },

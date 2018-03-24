@@ -11,10 +11,12 @@ config:
       arrivalRate: 5
     - duration: 60
       arrivalRate: 25
+  defaults:
+    headers:
 scenarios:
   - name: "pageload"
     flow:
       - loop:
         - get:
-            url: "/restaurants/{{$randomNumber(1,10000000)}"
+            url: "/restaurants/{{$randomNumber(1,10000000)}}/gallery"
         count: 4

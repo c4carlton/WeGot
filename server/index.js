@@ -1,4 +1,4 @@
-// require('newrelic');
+require('newrelic');
 const request = require("supertest");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -6,7 +6,19 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 
-mongoose.connect("mongodb://localhost/photos");
+// const connect = () => {
+//     let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
+//     console.log('connecting to', mongoURI);
+//     return mongo.connect(mongoURI)
+//     .then(() => (console.log('connected to database')))
+//     .catch((err) => {
+//       console.log(err)
+//       return err;
+//     });
+// };
+let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
+
+mongoose.connect(`mongodb://${mongoURI}/photos`);
 // mongoose.connect('mongodb://database/photos');
 
 const Photos = require("../database/index.js");
