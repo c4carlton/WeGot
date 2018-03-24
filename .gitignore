@@ -25,8 +25,6 @@ coverage
 build/
 dist/bundle.js
 
-#
+# ignore these
 newrelic.js
-
-#
 config.js
