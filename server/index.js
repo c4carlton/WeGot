@@ -1,4 +1,4 @@
-require('newrelic');
+// require('newrelic');
 const request = require("supertest");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -19,7 +19,8 @@ const path = require("path");
 
 // db for ec2
 let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
-mongoose.connect(mongoURI);
+console.log(mongoURI, 'this should be mongoURI')
+// mongoose.connect(mongoURI);
 
 // db for localhost
 // mongoose.connect('mongodb://localhost/photos');
