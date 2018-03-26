@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": " DATABASE=‘mongodb://172.31.18.39:27017/photos’ nodemon server/index.js",
+    "server": "DATABASE=‘mongodb://172.31.18.39:27017/photos’ nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "seed": "node data/seed.js",
     "test": "jest",

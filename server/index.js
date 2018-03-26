@@ -16,10 +16,13 @@ const path = require("path");
 //       return err;
 //     });
 // };
-let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
 
+// db for ec2
+let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
 mongoose.connect(`mongodb://${mongoURI}/photos`);
-// mongoose.connect('mongodb://database/photos');
+
+// db for localhost
+// mongoose.connect('mongodb://localhost/photos');
 
 const Photos = require("../database/index.js");
 
@@ -30,8 +33,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // serve static files from dist dir
-app.use(
-  "/restaurants/:id",
+app.use("/restaurants/:id",
   express.static(path.join(__dirname, "../client/dist"))
 );
 
