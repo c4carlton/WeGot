@@ -19,7 +19,7 @@ const path = require("path");
 
 // db for ec2
 let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
-mongoose.connect(`mongodb://${mongoURI}/photos`);
+mongoose.connect(mongoURI);
 
 // db for localhost
 // mongoose.connect('mongodb://localhost/photos');
