@@ -39,7 +39,7 @@ function findAll(callback) {
 function findOne(id, callback) {
   console.log('database finding by id:', id)
   Photos.find({
-    place_id: id,
+    _id: id,
   }, callback);
 }
 
