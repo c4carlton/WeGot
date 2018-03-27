@@ -9,7 +9,7 @@ const path = require("path");
 const connect = () => {
     let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
     console.log('connecting to', mongoURI);
-    return mongo.connect(mongoURI)
+    return mongoose.connect(mongoURI)
     .then(() => (console.log('connected to database')))
     .catch((err) => {
       console.log(err)
@@ -18,7 +18,6 @@ const connect = () => {
 };
 
 // mongoose.connect(mongoURI)
-
 // db for ec2
 // let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
 // console.log(mongoURI, 'this should be mongoURI')
