@@ -21,6 +21,12 @@ const path = require("path");
 let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
 console.log(mongoURI, 'this should be mongoURI')
 mongoose.connect(mongoURI)
+  .then(() => {
+    console.log('server is connected to db')
+  })
+  .catch((error) => {
+    console.log(error)
+  })
 
 // db for localhost
 // mongoose.connect('mongodb://localhost/photos');
