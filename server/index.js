@@ -6,27 +6,28 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 
-// const connect = () => {
-//     let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
-//     console.log('connecting to', mongoURI);
-//     return mongo.connect(mongoURI)
-//     .then(() => (console.log('connected to database')))
-//     .catch((err) => {
-//       console.log(err)
-//       return err;
-//     });
-// };
+const connect = () => {
+    let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
+    console.log('connecting to', mongoURI);
+    return mongo.connect(mongoURI)
+    .then(() => (console.log('connected to database')))
+    .catch((err) => {
+      console.log(err)
+      return err;
+    });
+};
+
+// mongoose.connect(mongoURI)
 
 // db for ec2
-let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
-console.log(mongoURI, 'this should be mongoURI')
-mongoose.connect(mongoURI)
-  .then(() => {
-    console.log('server is connected to db')
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+// let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
+// console.log(mongoURI, 'this should be mongoURI')
+//   .then(() => {
+//     console.log('server is connected to db')
+//   })
+//   .catch((error) => {
+//     console.log(error)
+//   })
 
 // db for localhost
 // mongoose.connect('mongodb://localhost/photos');
