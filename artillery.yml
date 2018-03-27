@@ -3,9 +3,10 @@ config:
     pool:10
   environments:
     local:
-  target: 'http://localhost:3001'
+  # target: 'http://localhost:3001'
+  target: 'http://13.57.215.165:3001'
   phases:
-    - duration: 60
+    - duration: 20
       arrivalRate: 25
     # - duration: 40
     #   arrivalRate: 5
