@@ -23,32 +23,14 @@ const photoSchema = mongoose.Schema({
   reviews: [ReviewSchema],
 });
 
-const Photos = mongoose.model('Photos', photoSchema);
-
-// check if database is already seeded;
-function isSeeded() {
-  return Photos.count();
-}
-
-// findAll retrieves all stories
-function findAll(callback) {
-  Photos.find({}, callback);
-}
+module.exports = mongoose.model('Photos', photoSchema);
 
 // findOne will retrieve the photo associated with the given id
-function findOne(id, callback) {
-  console.log('database finding by id:', id)
-  Photos.find({
-    _id: id,
-  }, callback);
-}
-
-// insertOne will insert on entry into database
-function insertOne(entry, callback) {
-  Photos.create(entry, callback);
-}
-
-exports.findOne = findOne;
-exports.findAll = findAll;
-exports.insertOne = insertOne;
-exports.isSeeded = isSeeded;
+// function findOne(id, callback) {
+//   console.log('database finding by id:', id)
+//   Photos.find({
+//     _id: id,
+//   }, callback);
+// }
+//
+// exports.findOne = findOne;

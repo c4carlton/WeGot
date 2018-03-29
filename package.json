@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "DATABASE='mongodb://52.53.251.249:27017/photos', nodemon server/index.js",
+    "server": "DATABASE='mongodb://52.53.182.103:27017/photos' nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "seed": "node data/seed.js",
     "test": "jest",
@@ -25,6 +25,7 @@
     "fs": "0.0.1-security",
     "jquery": "^3.3.1",
     "mongoose": "^5.0.6",
+    "morgan": "^1.9.0",
     "mysql": "^2.15.0",
     "new": "^0.1.1",
     "newrelic": "^3.2.0",

@@ -4,7 +4,7 @@ config:
   environments:
     local:
   # target: 'http://localhost:3001'
-  target: 'http://13.57.215.165:3001'
+  target: 'http://13.56.14.51:3001'
   phases:
     - duration: 20
       arrivalRate: 25

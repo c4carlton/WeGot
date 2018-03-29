@@ -1,68 +1,88 @@
 // require('newrelic');
-const request = require("supertest");
+// const request = require("supertest");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const MongoClient = require('mongodb').MongoClient
 const cors = require("cors");
 const path = require("path");
+const redis = require('redis')
+const morgan = require('morgan');
+const PhotoModel = require('../database/index.js')
+// const Photos = require("../database/index.js");
+const app = express();
+const util = require('util');
+const port = 3001;
 
-// const connect = () => {
-//     let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
-//     console.log('connecting to', mongoURI);
-//     return mongo.connect(mongoURI)
-//     .then(() => (console.log('connected to database')))
-//     .catch((err) => {
-//       console.log(err)
-//       return err;
-//     });
-// };
-
-
-// db for ec2
 let mongoURI = process.env.DATABASE || 'mongodb://127.0.0.1/photos';
 console.log(mongoURI, 'this should be mongoURI')
-mongoose.connect(mongoURI).then(() => {
-    console.log('server is connected to db')
+mongoose.connect(mongoURI)
+    .then(() => {
+    console.log(`server is connected to db @ ${mongoURI}`)
   }).catch((error) => {
     console.log(error)
   })
 
+app.use(cors());
+app.use(bodyParser.json());
+
+// something wrong with redis client...not connecting correctly
+const client = redis.createClient('redis://18.144.59.178:6379');
+// client.get = util.promisify(client.get);
+client.on('connect', () => {
+  console.log('hooray we are connected!')
+  client.flushdb((err, succeeded) => {
+    console.log(succeeded, 'this has succeeded'); // will be true if successfull
+  });
+});
+
 // db for localhost
 // mongoose.connect('mongodb://localhost/photos');
 
-const Photos = require("../database/index.js");
-
-const app = express();
-
-app.use(cors());
-
-app.use(bodyParser.json());
 
 // serve static files from dist dir
-app.use("/restaurants/:id",
-  express.static(path.join(__dirname, "../client/dist"))
-);
+app.use("/restaurants/:id", express.static(path.join(__dirname, "../client/dist")));
 
-// if no ID typed into url bar, redirect to this ID
-// app.get("/", (req, res) => {
-//   res.status(200).redirect("/restaurants/ChIJUcXYWWGAhYARmjMY2bJAG2s");
-// });
+app.get('/', (req, res) => {
+  res.status(200).redirect('/restaurants/1');
+});
 
 // retrieve data from API(db)
-app.get("/api/restaurants/:id/gallery", (req, res) => {
-  const id = req.params.id;
-  console.log("server querying for id: ", id);
-  Photos.findOne(id, (err, data) => {
+app.get('/api/restaurants/:id/gallery', (req, res) => {
+  console.log(req.params.id, 'this is the id')
+  var id = Number(req.params.id)
+  client.get(id, (err, data) => {
     if (err) {
-      console.log(err, ' this is error in expresss')
-      res.sendStatus(500);
+      console.log(err)
+    } else if (data) {
+      console.log('here1')
+      res.json(JSON.parse([data]));
     } else {
-      console.log(data, 'this is data in express')
-      res.json(data);
+      console.log(id, 'here2')
+      PhotoModel.find({place_id: id}, (err, response)=> {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log('awwwyusss')
+          console.log(response)
+          client.setex(req.params.id, 60, JSON.stringify(response));
+          res.json(response);
+        }
+      })
+      // PhotoModel.find(req.params.id, (err, data) => {
+      //   if (err) {
+      //     console.log('here3')
+      //     res.sendStatus(500);
+      //   } else {
+      //     console.log('awwwyusss')
+      //     client.setex(req.params.id, 60, JSON.stringify(data));
+      //     res.json(data);
+      //   }
+      // });
     }
   });
 });
 
-app.listen(3001, () => console.log("Gallery App listening on port 3001!"));
+app.listen(port, () => console.log(`Gallery App listening on port ${port}!`));
 
 module.exports = app;
