@@ -9,7 +9,6 @@ const path = require("path");
 const redis = require('redis')
 const morgan = require('morgan');
 const PhotoModel = require('../database/index.js')
-// const Photos = require("../database/index.js");
 const app = express();
 const util = require('util');
 const port = 3001;
@@ -30,7 +29,6 @@ app.use(bodyParser.json());
 const client = redis.createClient('redis://18.144.59.178:6379');
 // client.get = util.promisify(client.get);
 client.on('connect', () => {
-  console.log('hooray we are connected!')
   client.flushdb((err, succeeded) => {
     console.log(succeeded, 'this has succeeded'); // will be true if successfull
   });
@@ -49,22 +47,17 @@ app.get('/', (req, res) => {
 
 // retrieve data from API(db)
 app.get('/api/restaurants/:id/gallery', (req, res) => {
-  console.log(req.params.id, 'this is the id')
   var id = Number(req.params.id)
   client.get(id, (err, data) => {
     if (err) {
       console.log(err)
     } else if (data) {
-      console.log('here1')
       res.json(JSON.parse([data]));
     } else {
-      console.log(id, 'here2')
       PhotoModel.find({place_id: id}, (err, response)=> {
         if (err) {
           console.log(err)
         } else {
-          console.log('awwwyusss')
-          console.log(response)
           client.setex(req.params.id, 60, JSON.stringify(response));
           res.json(response);
         }
