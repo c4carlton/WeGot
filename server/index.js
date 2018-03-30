@@ -62,16 +62,6 @@ app.get('/api/restaurants/:id/gallery', (req, res) => {
           res.json(response);
         }
       })
-      // PhotoModel.find(req.params.id, (err, data) => {
-      //   if (err) {
-      //     console.log('here3')
-      //     res.sendStatus(500);
-      //   } else {
-      //     console.log('awwwyusss')
-      //     client.setex(req.params.id, 60, JSON.stringify(data));
-      //     res.json(data);
-      //   }
-      // });
     }
   });
 });

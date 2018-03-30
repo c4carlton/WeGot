@@ -3,15 +3,14 @@ config:
     pool:10
   environments:
     local:
-  # target: 'http://localhost:3001'
   target: 'http://13.56.14.51:3001'
   phases:
     - duration: 20
       arrivalRate: 25
-    # - duration: 40
-    #   arrivalRate: 5
-    # - duration: 60
-    #   arrivalRate: 25
+    - duration: 40
+      arrivalRate: 40
+    - duration: 60
+      arrivalRate: 60
   defaults:
     headers:
 scenarios:
