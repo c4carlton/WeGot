@@ -7,10 +7,10 @@ config:
   phases:
     - duration: 20
       arrivalRate: 25
-    - duration: 40
-      arrivalRate: 40
-    - duration: 60
-      arrivalRate: 60
+    # - duration: 40
+    #   arrivalRate: 40
+    # - duration: 60
+    #   arrivalRate: 60
   defaults:
     headers:
 scenarios:
