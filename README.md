@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Project Name
 Photo Gallery component of WeGot, a clone of the food review site Zagat.com. This was part of a team project completed at Hack Reactor.
 
